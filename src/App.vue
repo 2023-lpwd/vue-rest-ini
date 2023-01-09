@@ -1,7 +1,7 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import Post from '@/components/Post.vue'
-import axios from 'axios'
+import { client } from '@/utils/axios'
 
 export default {
   components: {
@@ -19,19 +19,12 @@ export default {
   },
 
   async mounted () {
-    const categoriesResponse = await axios.get(import.meta.env.VITE_WP_API_URL + '/wc/v3/products/categories', {
-      headers: {
-        Authorization: `Basic ${btoa(`${import.meta.env.VITE_WP_USERNAME}:${import.meta.env.VITE_WP_PASSWORD}`)}`
-      }
-    })
+    // Request categories
+    const categoriesResponse = await client.get(import.meta.env.VITE_WP_API_URL + '/wc/v3/products/categories')
     this.categories = categoriesResponse.data
 
-    const productsResponse = await axios.get(import.meta.env.VITE_WP_API_URL + '/wc/v3/products', {
-      headers: {
-        Authorization: `Basic ${btoa(`${import.meta.env.VITE_WP_USERNAME}:${import.meta.env.VITE_WP_PASSWORD}`)}`
-      }
-    })
-
+    // Request products
+    const productsResponse = await client.get(import.meta.env.VITE_WP_API_URL + '/wc/v3/products')
     this.products = productsResponse.data
   }
 }
