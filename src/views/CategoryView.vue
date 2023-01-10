@@ -26,12 +26,12 @@ export default {
   },
 
   async mounted () {
-    await this.getProducts()
+    this.products = await this.getProducts()
   },
 
   // To switch between categories routes
-  async updated () {
-    await this.getProducts()
+  async beforeRouteUpdate () {
+    this.products = await this.getProducts()
   },
 
   methods: {
@@ -45,8 +45,7 @@ export default {
 
       // Get axios response to get products with current category
       const productsResponse = await client.get(import.meta.env.VITE_WP_API_URL + '/wc/v3/products?category=' + category.id)
-
-      this.products = productsResponse.data
+      return productsResponse.data
     }
   }
 }
