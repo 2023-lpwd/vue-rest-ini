@@ -17,20 +17,9 @@
           </div>
         </div>
       </div>
-
-      <div v-if="showroomTitle" class="showroom-section">
-        <Showroom :title="showroomTitle" />
-        page date : {{ pageData.date }}
-        <br>
-        formattedDate : {{ formattedDate }}
-        <br>
-        <p @click="count++">click : {{ counterText }}</p>
-
-
-<!--        <pre>-->
-<!--          {{ pageData }}-->
-<!--        </pre>-->
-      </div>
+    </div>
+    <div v-if="showroomTitle" class="showroom-section">
+      <Showroom :title="showroomTitle" :images="showroomImages" />
     </div>
   </main>
 </template>
@@ -65,10 +54,14 @@ export default {
       return `Cliqué ${this.count} fois`
     },
 
-
     showroomTitle () {
       if (!this.pageData.acf) return
       return this.pageData.acf.title
+    },
+
+    showroomImages () {
+      if (!this.pageData.acf) return
+      return [this.pageData.acf.images.left_image, this.pageData.acf.images.right_image]
     }
   },
 
@@ -92,5 +85,9 @@ export default {
 }
 .products-wrapper {
   margin-top: 50px;
+}
+
+.showroom-section {
+  margin-top: 100px;
 }
 </style>
