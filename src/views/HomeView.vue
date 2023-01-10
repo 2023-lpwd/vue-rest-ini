@@ -17,6 +17,20 @@
           </div>
         </div>
       </div>
+
+      <div v-if="showroomTitle" class="showroom-section">
+        <Showroom :title="showroomTitle" />
+        page date : {{ pageData.date }}
+        <br>
+        formattedDate : {{ formattedDate }}
+        <br>
+        <p @click="count++">click : {{ counterText }}</p>
+
+
+<!--        <pre>-->
+<!--          {{ pageData }}-->
+<!--        </pre>-->
+      </div>
     </div>
   </main>
 </template>
@@ -25,8 +39,10 @@
 import Product from '@/components/Product.vue'
 import {client} from "@/utils/axios"
 import Categories from "@/components/Categories.vue"
+import Showroom from "@/components/Showroom.vue"
 export default {
   components: {
+    Showroom,
     Categories,
     Product
   },
@@ -34,15 +50,35 @@ export default {
   data () {
     return {
       posts: [],
-      products: []
+      products: [],
+      pageData: {},
+      count: 0
+    }
+  },
+
+  computed: {
+    formattedDate () {
+      return new Date(this.pageData.date).toLocaleDateString()
+    },
+
+    counterText () {
+      return `Cliqué ${this.count} fois`
+    },
+
+
+    showroomTitle () {
+      if (!this.pageData.acf) return
+      return this.pageData.acf.title
     }
   },
 
   async mounted () {
-
     // Request products
     const productsResponse = await client.get(import.meta.env.VITE_WP_API_URL + '/wc/v3/products')
     this.products = productsResponse.data
+
+    const pageResponse = await client.get(import.meta.env.VITE_WP_API_URL + '/wp/v2/pages/29')
+    this.pageData = pageResponse.data
   }
 }
 </script>
