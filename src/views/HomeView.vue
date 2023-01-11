@@ -7,16 +7,15 @@
         </div>
       </div>
 
-
       <div class="products-wrapper">
         <h2 class="home__subtitle">Liste des produits</h2>
-
         <div class="products-list || row">
           <div v-for="(product, index) in products" class="products-item || column -size-3">
             <Product v-bind="product" />
           </div>
         </div>
       </div>
+
     </div>
     <div v-if="showroomTitle" class="showroom-section">
       <Showroom :title="showroomTitle" :images="showroomImages" />
