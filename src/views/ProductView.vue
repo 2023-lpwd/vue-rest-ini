@@ -6,9 +6,7 @@
 
         </div>
         <div class="column -size-6">
-          <Button :color="'blue'" :label="'Ajouter au panier'" />
-          <Button :color="'blue'" :size="'large'" :label="'Ajouter au panier'" />
-          <Button :color="'orange'" :size="'small'" :label="'Ajouter au panier'" />
+          <Button :color="'orange'" :label="'Ajouter au panier'" />
         </div>
       </div>
     </div>

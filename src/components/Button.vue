@@ -23,9 +23,14 @@ export default {
 <style lang="scss">
 .button {
   display: inline-flex;
-  padding: 2rem 4rem;
-  background-color: red;
+  padding: 1rem 3rem;
+  background-color: #2c3e50;
   border-radius: 5px;
+  transition: background-color .3s ease;
+
+  &:hover {
+    background-color: darken(#2c3e50, 10);
+  }
 
   &.-size-small {
     padding: 1rem 2rem;
@@ -37,14 +42,23 @@ export default {
 
   &.-color-blue {
     background-color: dodgerblue;
+
+    &:hover {
+      background-color: darken(dodgerblue, 10);
+    }
   }
 
   &.-color-orange {
     background-color: orange;
+
+    &:hover {
+      background-color: darken(orange, 10);
+    }
   }
 
   &__label {
     font-size: 16px;
+    font-weight: 700;
     color: white;
   }
 }
