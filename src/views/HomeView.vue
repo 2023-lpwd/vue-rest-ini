@@ -54,12 +54,12 @@ export default {
     },
 
     showroomTitle () {
-      if (!this.pageData.acf) return
+      if (!this.pageData?.acf) return
       return this.pageData.acf.title
     },
 
     showroomImages () {
-      if (!this.pageData.acf) return
+      if (!this.pageData?.acf) return
       return [this.pageData.acf.images.left_image, this.pageData.acf.images.right_image]
     }
   },
