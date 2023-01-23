@@ -9,7 +9,6 @@
             <input type="range" min="0" max="2000" v-model="price">
             <br>
             prix: {{ price }}
-
             <br>
             <input type="checkbox" id="cuisine" value="cuisine" v-model="categories">
             <label for="cuisine">Cuisine</label>
@@ -20,7 +19,7 @@
           <div class="column -size-9">
             <div class="products-list || row">
               <div v-for="(product, index) in filteredProducts" class="products-item || column -size-3">
-                <Product v-bind="product" />
+                <Product v-bind="{ slug: product.slug, name: product.name, description: product.description, price: product.price, images: product.images }" />
               </div>
             </div>
           </div>
