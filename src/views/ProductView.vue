@@ -3,9 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="column -size-6">
-          route : {{ $route.params }}
-          <br>
-<!--          wordpress data : {{ product }}-->
+          <ProductGallery :images="product.images" />
         </div>
         <div class="column -size-6">
           <h1 class="product-view__title">{{ product.name }}</h1>
@@ -21,10 +19,12 @@
 
 <script>
 import Button from '@/components/Button.vue'
-import {client} from "@/utils/axios"
+import ProductGallery from '@/components/ProductGallery.vue'
+import { client } from "@/utils/axios"
 export default {
   components: {
-    Button
+    Button,
+    ProductGallery
   },
 
   data () {
