@@ -4,7 +4,7 @@
       <img class="product-gallery__image" :src="active.src" :alt="active.alt">
     </div>
     <div class="product-gallery__list">
-      <div v-for="(image, index) in images" class="product-gallery__item" :key="index" @click="changeImage(image)">
+      <div v-for="(image, index) in images" :class="['product-gallery__item', { '-is-active': active.id === image.id }]" :key="index" @click="changeImage(image)">
         <div class="product-gallery__media">
           <img class="product-gallery__image" :src="image.src" :alt="image.alt">
         </div>
@@ -48,6 +48,10 @@ export default {
 
   &__item {
     width: 22.5%;
+
+    &.-is-active {
+      opacity: .5;
+    }
   }
 
   &__media {
