@@ -9,6 +9,10 @@
         <nav class="header__navigation">
           <RouterLink :class="'header__link'" to="/">Home</RouterLink>
         </nav>
+
+        <div class="header__cart">
+          Panier (0)
+        </div>
       </div>
     </div>
   </header>
@@ -70,6 +74,13 @@ export default {
     color: #ffffff;
     font-weight: 700;
     text-decoration: none;
+  }
+
+  &__cart {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    margin-left: auto;
   }
 
 }

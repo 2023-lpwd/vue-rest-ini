@@ -1,5 +1,6 @@
 <template>
   <div class="product">
+    {{ $store.state.count }}
     <RouterLink :class="'product__link'" :to="`/products/${slug}`" />
     <div v-if="cover" class="product__media">
       <img :class="'product__image'" :src="cover.src" :alt="cover.alt">
