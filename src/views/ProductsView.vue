@@ -9,6 +9,13 @@
             <input type="range" min="0" max="2000" v-model="price">
             <br>
             prix: {{ price }}
+
+            <br>
+            <input type="checkbox" id="cuisine" value="cuisine" v-model="categories">
+            <label for="cuisine">Cuisine</label>
+            <br>
+            <input type="checkbox" id="chambre" value="chambre" v-model="categories">
+            <label for="chambre">Chambre</label>
           </div>
           <div class="column -size-9">
             <div class="products-list || row">
@@ -33,6 +40,7 @@ export default {
   data () {
     return {
       products: [],
+      categories: [],
       price: 2000
     }
   },
