@@ -12,7 +12,7 @@
           </div>
           <div class="column -size-9">
             <div class="products-list || row">
-              <div v-for="(product, index) in products" class="products-item || column -size-3">
+              <div v-for="(product, index) in filteredProducts" class="products-item || column -size-3">
                 <Product v-bind="product" />
               </div>
             </div>
@@ -33,13 +33,17 @@ export default {
   data () {
     return {
       products: [],
-      price: '2000'
+      price: 2000
     }
   },
 
   computed: {
     filteredProducts () {
-
+      return this.products.filter((product) => {
+        // If true, returned in new array filteredProducts
+        // WordPress returns a string price -> convert it to number
+        return parseInt(product.price) < this.price
+      })
     }
   },
 
