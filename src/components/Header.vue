@@ -10,9 +10,7 @@
           <RouterLink :class="'header__link'" to="/">Home</RouterLink>
         </nav>
 
-        <div class="header__cart">
-          Panier (0)
-        </div>
+        <RouterLink :class="'header__cart'" to="/cart">Panier (0)</RouterLink>
       </div>
     </div>
   </header>
