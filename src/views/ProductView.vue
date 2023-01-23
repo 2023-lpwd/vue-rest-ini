@@ -6,7 +6,6 @@
           <ProductGallery v-if="product.images" :images="product.images" />
         </div>
         <div class="column -size-6">
-          {{ $store.state }}
           <h1 class="product-view__title">{{ product.name }}</h1>
           <p class="product-view__reference">{{ product.sku }}</p>
           <div class="product-view__description" v-html="product.description" />

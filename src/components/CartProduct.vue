@@ -3,12 +3,17 @@
     <img v-if="mainImage" class="cart-product__image" :src="mainImage.src" :alt="mainImage.alt" />
     <span class="cart-product__name">{{ name }}</span>
     <span class="cart-product__price">{{ price }}€</span>
+    <span class="cart-product__remove" @click="removeFromCart">x</span>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    id: {
+      type: Number,
+      default: null
+    },
     images: {
       type: Array,
       default: () => []
@@ -27,6 +32,12 @@ export default {
     mainImage () {
       if (!this.images.length) return
       return this.images[0]
+    }
+  },
+
+  methods: {
+    removeFromCart () {
+      this.$store.commit('remove', this.id)
     }
   }
 }
@@ -52,6 +63,12 @@ export default {
 
   &__price {
     font-size: 16px;
+  }
+
+  &__remove {
+    font-size: 30px;
+    color: red;
+    cursor: pointer;
   }
 }
 </style>
