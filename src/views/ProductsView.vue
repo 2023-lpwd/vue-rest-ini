@@ -15,6 +15,8 @@
             <br>
             <input type="checkbox" id="chambre" value="chambre" v-model="categories">
             <label for="chambre">Chambre</label>
+            <br>
+            {{ categories }}
           </div>
           <div class="column -size-9">
             <div class="products-list || row">
@@ -46,10 +48,18 @@ export default {
 
   computed: {
     filteredProducts () {
+      // If true, returned in new array filteredProducts
       return this.products.filter((product) => {
-        // If true, returned in new array filteredProducts
         // WordPress returns a string price -> convert it to number
-        return parseInt(product.price) < this.price
+        const hasLowerPrice = parseInt(product.price) < this.price
+
+        // this.categories is empty -> only filter by price
+        if (!this.categories.length) return hasLowerPrice
+        
+        // this.categories is not empty -> filter by price AND categories
+        return hasLowerPrice && product.categories.find((productCategory) => {
+          return this.categories.includes(productCategory.slug)
+        })
       })
     }
   },
