@@ -23,7 +23,7 @@ export default {
 <style lang="scss">
 .button {
   display: inline-flex;
-  padding: 1rem 3rem;
+  padding: .5rem 1.5rem;
   background-color: #2c3e50;
   border-radius: 5px;
   transition: background-color .3s ease;
@@ -33,11 +33,11 @@ export default {
   }
 
   &.-size-small {
-    padding: 1rem 2rem;
+    padding: .5rem 1rem;
   }
 
   &.-size-large {
-    padding: 2rem 6rem;
+    padding: 1rem 3rem;
   }
 
   &.-color-blue {
