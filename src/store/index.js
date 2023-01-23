@@ -2,6 +2,11 @@ import { createStore } from 'vuex'
 
 export default createStore({
 	state: {
-		count: 3
+		products: []
+	},
+	mutations: {
+		add (state, product) {
+			state.products.push(product)
+		}
 	}
 })

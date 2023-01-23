@@ -6,11 +6,12 @@
           <ProductGallery v-if="product.images" :images="product.images" />
         </div>
         <div class="column -size-6">
+          {{ $store.state }}
           <h1 class="product-view__title">{{ product.name }}</h1>
           <p class="product-view__reference">{{ product.sku }}</p>
           <div class="product-view__description" v-html="product.description" />
           <p class="product-view__price">{{ product.price }}€</p>
-          <Button :color="'orange'" :label="'Ajouter au panier'" />
+          <Button :color="'orange'" :label="'Ajouter au panier'" @click="addToCart" />
         </div>
       </div>
     </div>
@@ -36,6 +37,12 @@ export default {
   async mounted () {
     const response = await client.get(import.meta.env.VITE_WP_API_URL + '/wc/v3/products?slug=' + this.$route.params.product)
     this.product = response.data[0]
+  },
+
+  methods: {
+    addToCart () {
+      this.$store.commit('add', this.product)
+    }
   }
 }
 </script>
