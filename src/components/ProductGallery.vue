@@ -1,10 +1,10 @@
 <template>
   <div class="product-gallery">
-    <div class="product-gallery__media">
+    <div v-if="active" class="product-gallery__media">
       <img class="product-gallery__image" :src="active.src" :alt="active.alt">
     </div>
     <div class="product-gallery__list">
-      <div v-for="(image, index) in images" class="product-gallery__item" :key="index">
+      <div v-for="(image, index) in images" class="product-gallery__item" :key="index" @click="changeImage(image)">
         <div class="product-gallery__media">
           <img class="product-gallery__image" :src="image.src" :alt="image.alt">
         </div>
@@ -25,6 +25,12 @@ export default {
   data () {
     return {
       active: this.images[0]
+    }
+  },
+
+  methods: {
+    changeImage (image) {
+      this.active = image
     }
   }
 }

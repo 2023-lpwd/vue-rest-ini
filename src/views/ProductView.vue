@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="column -size-6">
-          <ProductGallery :images="product.images" />
+          <ProductGallery v-if="product.images" :images="product.images" />
         </div>
         <div class="column -size-6">
           <h1 class="product-view__title">{{ product.name }}</h1>
