@@ -10,7 +10,7 @@
           <RouterLink :class="'header__link'" to="/">Home</RouterLink>
         </nav>
 
-        <RouterLink :class="'header__cart'" to="/cart">Panier (0)</RouterLink>
+        <RouterLink :class="'header__cart'" to="/cart">Panier ({{cartQuantity}})</RouterLink>
       </div>
     </div>
   </header>
@@ -20,9 +20,9 @@
 </template>
 
 <script>
+import { client } from "@/utils/axios"
 import { RouterLink } from 'vue-router'
 import Categories from "@/components/Categories.vue"
-import {client} from "@/utils/axios"
 
 export default {
   components: {
@@ -33,6 +33,23 @@ export default {
   data () {
     return {
       categories: []
+    }
+  },
+
+  computed: {
+    cartQuantity () {
+      // let quantity = 0
+      // this.$store.state.products.forEach(product => {
+      //   // quantity = quantity + product.quantity
+      //   quantity+=product.quantity
+      // })
+      // return quantity
+
+      // Same thing but shorter syntax
+      return this.$store.state.products.reduce((quantity, product) => {
+        quantity+=product.quantity
+        return quantity
+      }, 0)
     }
   },
 
