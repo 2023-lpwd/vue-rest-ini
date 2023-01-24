@@ -10,15 +10,20 @@
       <div class="cart-view__total">
         Total : {{ cartTotal }}€
       </div>
+
+      <div class="cart-view__validate">
+        <Button :label="'Valider le panier'" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import CartProduct from "@/components/CartProduct.vue"
+import Button from "@/components/Button.vue"
 
 export default {
-  components: { CartProduct },
+  components: { Button, CartProduct },
 
   computed: {
     cartTotal () {
@@ -30,3 +35,23 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.cart-view {
+  padding: 50px;
+
+  &__total {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 50px;
+    text-align: right;
+   }
+
+  &__validate {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    margin-top: 50px;
+  }
+}
+</style>
