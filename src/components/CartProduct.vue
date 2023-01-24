@@ -2,7 +2,11 @@
   <div class="cart-product">
     <img v-if="mainImage" class="cart-product__image" :src="mainImage.src" :alt="mainImage.alt" />
     <span class="cart-product__name">{{ name }}</span>
-    <span class="cart-product__quantity">qte: {{ quantity }}</span>
+    <span class="cart-product__quantity">
+      <button>-</button>
+      qte: {{ quantity }}
+      <button>+</button>
+    </span>
     <span class="cart-product__price">{{ price }}€</span>
     <p class="cart-product__total">
       Total
@@ -44,7 +48,7 @@ export default {
       return this.images[0]
     },
     total () {
-      return this.price * this.quantity
+      return parseInt(this.price) * this.quantity
     }
   },
 
