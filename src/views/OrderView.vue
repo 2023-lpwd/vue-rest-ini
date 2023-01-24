@@ -151,6 +151,7 @@ export default {
 
         // Request has succeeded. Display a success message
         this.message = { type: 'success', text: 'Votre commande a bien été enregistrée' }
+        this.$store.commit('emptyCart')
 
       } catch (err) {
         // Request has failed. Display an error message

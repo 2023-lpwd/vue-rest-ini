@@ -33,6 +33,10 @@ export default createStore({
 			}
 			// Synchronize store & localStorage
 			localStorage.setItem('cart', JSON.stringify(state.products))
+		},
+		emptyCart (state) {
+			state.products = []
+			localStorage.setItem('cart', JSON.stringify(state.products))
 		}
 	}
 })
