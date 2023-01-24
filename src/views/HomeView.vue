@@ -68,9 +68,6 @@ export default {
     // Request products
     const productsResponse = await client.get(import.meta.env.VITE_WP_API_URL + '/wc/v3/products')
     this.products = productsResponse.data
-
-    const pageResponse = await client.get(import.meta.env.VITE_WP_API_URL + '/wp/v2/pages/29')
-    this.pageData = pageResponse.data
   }
 }
 </script>

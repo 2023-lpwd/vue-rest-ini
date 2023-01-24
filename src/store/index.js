@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
 	state: {
-		products: []
+		products: JSON.parse(localStorage.getItem('cart')) || []
 	},
 	mutations: {
 		add (state, product) {
@@ -15,10 +15,12 @@ export default createStore({
 				// stateProduct already exist in cart -> Increase quantity
 				stateProduct.quantity++
 			}
+			localStorage.setItem('cart', JSON.stringify(state.products))
 		},
 		remove (state, id) {
 			const indexToDelete = state.products.findIndex(product => product.id === id)
 			state.products.splice(indexToDelete, 1)
+			localStorage.setItem('cart', JSON.stringify(state.products))
 		}
 	}
 })
