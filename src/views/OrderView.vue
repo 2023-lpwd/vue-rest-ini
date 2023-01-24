@@ -85,6 +85,9 @@
           <Button :label="'Valider la commande'" @click="confirmOrder" />
         </div>
       </form>
+      <div v-if="message.text" :class="['order-view__message', `-is-type-${message.type}`]">
+        {{ message.text }}
+      </div>
     </div>
   </div>
 </template>
@@ -120,12 +123,13 @@ export default {
           postcode: '',
           country: ''
         },
-      }
+      },
+      message: {}
     }
   },
 
   methods: {
-    confirmOrder () {
+    async confirmOrder () {
       // Create array from store product array with only needed keys
       const lineItems = this.$store.state.products.map((product) => {
         return {
@@ -134,15 +138,24 @@ export default {
         }
       })
 
-      // Trigger a POST request on the order endpoint to create an order
-      const response = client.post(`${import.meta.env.VITE_WP_API_URL}/wc/v3/orders`, {
-        payment_method: "paypal",
-        payment_method_title: "PayPal",
-        set_paid: true,
-        billing: this.form.billing,
-        shipping: this.form.billing,
-        line_items: lineItems
-      })
+      try {
+        // Trigger a POST request on the order endpoint to create an order
+        const response = await client.post(`${import.meta.env.VITE_WP_API_URL}/wc/v3/orders`, {
+          payment_method: "paypal",
+          payment_method_title: "PayPal",
+          set_paid: true,
+          billing: this.form.billing,
+          shipping: this.form.billing,
+          line_items: lineItems
+        })
+
+        // Request has succeeded. Display a success message
+        this.message = { type: 'success', text: 'Votre commande a bien été enregistrée' }
+
+      } catch (err) {
+        // Request has failed. Display an error message
+        this.message = { type: 'error', text: 'Une erreur est survenue' }
+      }
     }
   }
 }
@@ -177,6 +190,18 @@ export default {
 
   &__submit {
     margin-top: 30px;
+  }
+
+  &__message {
+    font-size: 16px;
+    font-weight: 700;
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+
+    &.-is-type-success {
+      color: darkslategrey;
+    }
   }
 
 }
