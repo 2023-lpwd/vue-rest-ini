@@ -55,7 +55,15 @@
           <div class="column -size-6">
             <div class="order-view__field">
               <label class="order-view__label" for="country">Pays</label>
-              <input class="order-view__input" id="country" type="text" name="country" v-model="form.billing.country">
+              <select class="order-view__input" v-model="form.billing.country">
+                <option disabled value="">Sélectionner un pays</option>
+                <option value="DE">Allemagne</option>
+                <option value="BE">Belgique</option>
+                <option value="IT">Italie</option>
+                <option value="ES">Espagne</option>
+                <option value="CH">Suisse</option>
+                <option value="FR">France</option>
+              </select>
             </div>
           </div>
         </div>
@@ -117,6 +125,10 @@ export default {
 
   &__form {
     margin-top: 50px;
+  }
+
+  &__row {
+    margin-top: 0px;
   }
 
   &__field {
