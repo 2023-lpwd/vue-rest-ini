@@ -18,8 +18,20 @@ export default createStore({
 			localStorage.setItem('cart', JSON.stringify(state.products))
 		},
 		remove (state, id) {
+			// We need to find index of product we want to delete
 			const indexToDelete = state.products.findIndex(product => product.id === id)
+			// Delete 1 item from index
 			state.products.splice(indexToDelete, 1)
+			// Synchronize store & localStorage
+			localStorage.setItem('cart', JSON.stringify(state.products))
+		},
+		updateQuantity (state, { id, quantity }) {
+			if (quantity <= 0) return
+			const stateProduct = state.products.find(item => id === item.id)
+			if (stateProduct) {
+				stateProduct.quantity = quantity
+			}
+			// Synchronize store & localStorage
 			localStorage.setItem('cart', JSON.stringify(state.products))
 		}
 	}

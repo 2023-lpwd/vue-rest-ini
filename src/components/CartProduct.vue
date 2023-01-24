@@ -3,9 +3,9 @@
     <img v-if="mainImage" class="cart-product__image" :src="mainImage.src" :alt="mainImage.alt" />
     <span class="cart-product__name">{{ name }}</span>
     <span class="cart-product__quantity">
-      <button>-</button>
+      <button @click="updateProductQuantity(quantity - 1)">-</button>
       qte: {{ quantity }}
-      <button>+</button>
+      <button @click="updateProductQuantity(quantity + 1)">+</button>
     </span>
     <span class="cart-product__price">{{ price }}€</span>
     <p class="cart-product__total">
@@ -55,6 +55,10 @@ export default {
   methods: {
     removeFromCart () {
       this.$store.commit('remove', this.id)
+    },
+
+    updateProductQuantity (quantity) {
+      this.$store.commit('updateQuantity', { quantity: quantity, id: this.id })
     }
   }
 }
