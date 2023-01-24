@@ -81,7 +81,6 @@
             </div>
           </div>
         </div>
-        {{ form.billing }}
         <div class="order-view__submit">
           <Button :label="'Valider la commande'" @click="confirmOrder" />
         </div>
@@ -174,6 +173,10 @@ export default {
   &__input {
     padding: 10px;
     font-size: 16px;
+  }
+
+  &__submit {
+    margin-top: 30px;
   }
 
 }
