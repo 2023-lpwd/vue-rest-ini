@@ -2,7 +2,13 @@
   <div class="cart-product">
     <img v-if="mainImage" class="cart-product__image" :src="mainImage.src" :alt="mainImage.alt" />
     <span class="cart-product__name">{{ name }}</span>
+    <span class="cart-product__quantity">qte: {{ quantity }}</span>
     <span class="cart-product__price">{{ price }}€</span>
+    <p class="cart-product__total">
+      Total
+      <br>
+      {{ total }}€
+    </p>
     <span class="cart-product__remove" @click="removeFromCart">x</span>
   </div>
 </template>
@@ -18,6 +24,10 @@ export default {
       type: Array,
       default: () => []
     },
+    quantity: {
+      type: Number,
+      default: 1
+    },
     name: {
       type: String,
       default: null
@@ -32,6 +42,9 @@ export default {
     mainImage () {
       if (!this.images.length) return
       return this.images[0]
+    },
+    total () {
+      return this.price * this.quantity
     }
   },
 
@@ -63,6 +76,12 @@ export default {
 
   &__price {
     font-size: 16px;
+  }
+
+  &__total {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
   }
 
   &__remove {
