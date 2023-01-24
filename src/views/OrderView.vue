@@ -48,8 +48,8 @@
         <div class="order-view__row || row">
           <div class="column -size-6">
             <div class="order-view__field">
-              <label class="order-view__label" for="zipcode">Code postal</label>
-              <input class="order-view__input" id="zipcode" type="text" name="zipcode" v-model="form.billing.zipcode">
+              <label class="order-view__label" for="postcode">Code postal</label>
+              <input class="order-view__input" id="postcode" type="text" name="postcode" v-model="form.billing.postcode">
             </div>
           </div>
           <div class="column -size-6">
@@ -81,39 +81,69 @@
             </div>
           </div>
         </div>
+        {{ form.billing }}
+        <div class="order-view__submit">
+          <Button :label="'Valider la commande'" @click="confirmOrder" />
+        </div>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import Button from "@/components/Button.vue"
+import {client} from "@/utils/axios"
+
 export default {
+  components: {Button},
   data () {
     return {
       form: {
         billing: {
-          first_name: null,
-          last_name: null,
-          address_1: null,
-          address_2: null,
-          city: null,
-          state: null,
-          postcode: null,
-          country: null,
-          email: null,
-          phone: null
+          first_name: '',
+          last_name: '',
+          address_1: '',
+          address_2: '',
+          city: '',
+          state: '',
+          postcode: '',
+          country: '',
+          email: '',
+          phone: ''
         },
         shipping: {
-          first_name: null,
-          last_name: null,
-          address_1: null,
-          address_2: null,
-          city: null,
-          state: null,
-          postcode: null,
-          country: null
+          first_name: '',
+          last_name: '',
+          address_1: '',
+          address_2: '',
+          city: '',
+          state: '',
+          postcode: '',
+          country: ''
         },
       }
+    }
+  },
+
+  methods: {
+    confirmOrder () {
+      // Create array from store product array with only needed keys
+      const lineItems = this.$store.state.products.map((product) => {
+        return {
+          product_id: product.id,
+          quantity: product.quantity
+        }
+      })
+
+      // Trigger a POST request on the order endpoint to create an order
+      const response = client.post(`${import.meta.env.VITE_WP_API_URL}/wc/v3/orders`, {
+        payment_method: "paypal",
+        payment_method_title: "PayPal",
+        set_paid: true,
+        billing: this.form.billing,
+        shipping: this.form.billing,
+        line_items: lineItems
+      })
     }
   }
 }
