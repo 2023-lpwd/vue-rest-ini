@@ -7,6 +7,9 @@
           <CartProduct v-bind="{ id: product.id, quantity: product.quantity, images: product.images, name: product.name, price: product.price }" />
         </div>
       </div>
+      <div class="cart-view__total">
+        Total : {{ cartTotal }}€
+      </div>
     </div>
   </div>
 </template>
@@ -15,6 +18,15 @@
 import CartProduct from "@/components/CartProduct.vue"
 
 export default {
-  components: {CartProduct}
+  components: { CartProduct },
+
+  computed: {
+    cartTotal () {
+      return this.$store.state.products.reduce((total, product) => {
+        total+=product.quantity * product.price
+        return total
+      }, 0)
+    }
+  }
 }
 </script>
