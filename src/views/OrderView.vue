@@ -128,7 +128,7 @@ export default {
   }
 
   &__row {
-    margin-top: 0px;
+    margin-top: 20px;
   }
 
   &__field {
