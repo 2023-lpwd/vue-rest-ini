@@ -158,6 +158,7 @@
         <div class="order-view__submit">
           <Button :label="'Valider la commande'" @click="confirmOrder" />
         </div>
+        <Loader />
       </form>
       <div v-if="message.text" :class="['order-view__message', `-is-type-${message.type}`]">
         {{ message.text }}
@@ -169,9 +170,10 @@
 <script>
 import Button from "@/components/Button.vue"
 import {client} from "@/utils/axios"
+import Loader from "@/components/Loader.vue"
 
 export default {
-  components: {Button},
+  components: { Loader, Button },
   data () {
     return {
       form: {
