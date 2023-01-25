@@ -220,7 +220,7 @@ export default {
           payment_method_title: "PayPal",
           set_paid: true,
           billing: this.form.billing,
-          shipping: this.form.billing,
+          shipping: this.otherAddress ? this.form.shipping : this.form.billing,
           line_items: lineItems
         })
 
