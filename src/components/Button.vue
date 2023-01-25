@@ -1,6 +1,7 @@
 <template>
   <div :class="['button', `-color-${color}`, `-size-${size}`]">
-    <span class="button__label">{{ label }}</span>
+    <RouterLink v-if="link" :to="link"><span class="button__label">{{ label }}</span></RouterLink>
+    <span v-else class="button__label">{{ label }}</span>
   </div>
 </template>
 
@@ -15,6 +16,10 @@ export default {
     },
     label: {
       type: String
+    },
+    link: {
+      type: String,
+      default: null
     }
   }
 }
@@ -23,10 +28,6 @@ export default {
 <style lang="scss">
 .button {
   display: inline-flex;
-  padding: .5rem 1.5rem;
-  background-color: #2c3e50;
-  border-radius: 5px;
-  transition: background-color .3s ease;
 
   &:hover {
     background-color: darken(#2c3e50, 10);
@@ -57,6 +58,11 @@ export default {
   }
 
   &__label {
+    display: inline-block;
+    padding: .5rem 1.5rem;
+    background-color: #2c3e50;
+    border-radius: 5px;
+    transition: background-color .3s ease;
     font-size: 16px;
     font-weight: 700;
     color: white;

@@ -3,6 +3,7 @@
     <div class="container">
       <h1 class="order-view__title">Commander</h1>
       <form action="" class="order-view__form">
+        <h2 class="order-view__subtitle">Informations de facturation</h2>
         <div class="order-view__row || row">
           <div class="column -size-6">
             <div class="order-view__field">
@@ -81,6 +82,79 @@
             </div>
           </div>
         </div>
+        <div class="order-view__row || row">
+          <div class="column -size-12">
+            <input id="billing-shipping" type="checkbox" v-model="otherAddress">
+            <label for="billing-shipping">Je souhaite livrer à une autre adresse</label>
+          </div>
+        </div>
+        <div v-if="otherAddress" class="order-view__shipping">
+          <h2 class="order-view__subtitle">Informations de livraison</h2>
+          <div class="order-view__row || row">
+            <div class="column -size-6">
+              <div class="order-view__field">
+                <label class="order-view__label" for="firstname">Prénom</label>
+                <input class="order-view__input" id="firstname" type="text" name="first_name" v-model="form.shipping.first_name">
+              </div>
+            </div>
+            <div class="column -size-6">
+              <div class="order-view__field">
+                <label class="order-view__label" for="lastname">Nom</label>
+                <input class="order-view__input" id="lastname" type="text" name="last_name" v-model="form.shipping.last_name">
+              </div>
+            </div>
+          </div>
+          <div class="order-view__row || row">
+            <div class="column -size-6">
+              <div class="order-view__field">
+                <label class="order-view__label" for="address">Adresse</label>
+                <input class="order-view__input" id="address" type="text" name="address_1" v-model="form.shipping.address_1">
+              </div>
+            </div>
+            <div class="column -size-6">
+              <div class="order-view__field">
+                <label class="order-view__label" for="extra-address">Complément d'adresse</label>
+                <input class="order-view__input" id="extra-address" type="text" name="address_2" v-model="form.shipping.address_2">
+              </div>
+            </div>
+          </div>
+          <div class="order-view__row || row">
+            <div class="column -size-6">
+              <div class="order-view__field">
+                <label class="order-view__label" for="city">Ville</label>
+                <input class="order-view__input" id="city" type="text" name="city" v-model="form.shipping.city">
+              </div>
+            </div>
+            <div class="column -size-6">
+              <div class="order-view__field">
+                <label class="order-view__label" for="state">État/région</label>
+                <input class="order-view__input" id="state" type="text" name="state" v-model="form.shipping.state">
+              </div>
+            </div>
+          </div>
+          <div class="order-view__row || row">
+            <div class="column -size-6">
+              <div class="order-view__field">
+                <label class="order-view__label" for="postcode">Code postal</label>
+                <input class="order-view__input" id="postcode" type="text" name="postcode" v-model="form.shipping.postcode">
+              </div>
+            </div>
+            <div class="column -size-6">
+              <div class="order-view__field">
+                <label class="order-view__label" for="country">Pays</label>
+                <select class="order-view__input" v-model="form.shipping.country">
+                  <option disabled value="">Sélectionner un pays</option>
+                  <option value="DE">Allemagne</option>
+                  <option value="BE">Belgique</option>
+                  <option value="IT">Italie</option>
+                  <option value="ES">Espagne</option>
+                  <option value="CH">Suisse</option>
+                  <option value="FR">France</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="order-view__submit">
           <Button :label="'Valider la commande'" @click="confirmOrder" />
         </div>
@@ -124,6 +198,7 @@ export default {
           country: ''
         },
       },
+      otherAddress: false,
       message: {}
     }
   },

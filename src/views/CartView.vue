@@ -13,7 +13,7 @@
           Total : {{ cartTotal }}€
         </div>
         <div class="cart-view__validate">
-          <Button :label="'Valider le panier'"/>
+          <Button :label="'Valider le panier'" :link="'/cart/order'" />
         </div>
       </div>
       <div v-else>
