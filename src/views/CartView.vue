@@ -2,17 +2,22 @@
   <div class="cart-view">
     <div class="container">
       <h1>Mon panier</h1>
-      <div class="cart-view__list">
-        <div v-for="(product, index) in $store.state.products" class="cart-view__item" :key="index">
-          <CartProduct v-bind="{ id: product.id, quantity: product.quantity, images: product.images, name: product.name, price: product.price }" />
+      <div v-if="$store.state.products.length" class="cart-view__wrapper">
+        <div class="cart-view__list">
+          <div v-for="(product, index) in $store.state.products" class="cart-view__item" :key="index">
+            <CartProduct
+                v-bind="{ id: product.id, quantity: product.quantity, images: product.images, name: product.name, price: product.price }"/>
+          </div>
+        </div>
+        <div class="cart-view__total">
+          Total : {{ cartTotal }}€
+        </div>
+        <div class="cart-view__validate">
+          <Button :label="'Valider le panier'"/>
         </div>
       </div>
-      <div class="cart-view__total">
-        Total : {{ cartTotal }}€
-      </div>
-
-      <div class="cart-view__validate">
-        <Button :label="'Valider le panier'" />
+      <div v-else>
+        <p class="cart-view__empty">Le panier est vide</p>
       </div>
     </div>
   </div>
@@ -52,6 +57,11 @@ export default {
     flex-flow: row wrap;
     justify-content: flex-end;
     margin-top: 50px;
+  }
+
+  &__empty {
+    font-size: 20px;
+    margin-top: 20px;
   }
 }
 </style>
