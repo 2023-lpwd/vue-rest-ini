@@ -28,6 +28,12 @@ export default {
     }
   },
 
+  watch: {
+    images (value) {
+      this.active = value[0]
+    }
+  },
+
   methods: {
     changeImage (image) {
       this.active = image

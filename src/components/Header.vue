@@ -3,7 +3,7 @@
     <div class="container">
       <div class="header__wrapper">
         <div class="header__logo">
-          <img alt="Vue logo" class="logo" src="@/assets/logo.svg" />
+          <img alt="Vue logo" class="logo" src="/src/assets/images/Logo_1-logo-final-1.svg" />
         </div>
 
         <nav class="header__navigation">

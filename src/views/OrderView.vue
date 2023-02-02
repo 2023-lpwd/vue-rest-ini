@@ -155,10 +155,10 @@
             </div>
           </div>
         </div>
-        <div class="order-view__submit">
+        <Loader v-if="loading" />
+        <div v-else class="order-view__submit">
           <Button :label="'Valider la commande'" @click="confirmOrder" />
         </div>
-        <Loader />
       </form>
       <div v-if="message.text" :class="['order-view__message', `-is-type-${message.type}`]">
         {{ message.text }}
@@ -200,6 +200,7 @@ export default {
           country: ''
         },
       },
+      loading: false,
       otherAddress: false,
       message: {}
     }
@@ -207,6 +208,7 @@ export default {
 
   methods: {
     async confirmOrder () {
+      this.loading = true
       // Create array from store product array with only needed keys
       const lineItems = this.$store.state.products.map((product) => {
         return {
@@ -226,12 +228,40 @@ export default {
           line_items: lineItems
         })
 
+        this.loading = false
+
         // Request has succeeded. Display a success message
         this.message = { type: 'success', text: 'Votre commande a bien été enregistrée' }
         this.$store.commit('emptyCart')
+        this.form = {
+          billing: {
+            first_name: '',
+            last_name: '',
+            address_1: '',
+            address_2: '',
+            city: '',
+            state: '',
+            postcode: '',
+            country: '',
+            email: '',
+            phone: ''
+          },
+          shipping: {
+            first_name: '',
+            last_name: '',
+            address_1: '',
+            address_2: '',
+            city: '',
+            state: '',
+            postcode: '',
+            country: ''
+          }
+        }
+
 
       } catch (err) {
         // Request has failed. Display an error message
+        this.loading = false
         this.message = { type: 'error', text: 'Une erreur est survenue' }
       }
     }
